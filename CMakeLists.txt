@@ -9,7 +9,9 @@ FetchContent_Declare(dlib
 )
 FetchContent_MakeAvailable(dlib)
 
-add_executable(${PROJECT_NAME} main.cpp)
+# add_executable(${PROJECT_NAME} opencv-dlib-face-det.cpp)
+# add_executable(${PROJECT_NAME} opencv-version.cpp)
+add_executable(${PROJECT_NAME} opencv-dlib-face-recognition.cpp)
 target_link_libraries(${PROJECT_NAME} dlib::dlib)
 
 find_package(OpenCV REQUIRED)
