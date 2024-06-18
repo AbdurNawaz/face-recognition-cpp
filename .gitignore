@@ -1,2 +1,6 @@
 **/*build/
 models/
+.DS_Store
+.vscode/
+*.avi
+*.mp4
