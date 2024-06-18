@@ -9,10 +9,12 @@ project(face-recognition-cpp)
 # )
 # FetchContent_MakeAvailable(dlib)
 
-add_executable(${PROJECT_NAME} opencv-read-write.cpp)
-# add_executable(${PROJECT_NAME} opencv-webcam.cpp)
-# add_executable(${PROJECT_NAME} opencv-dlib-face-det.cpp)
-# add_executable(${PROJECT_NAME} opencv-dlib-face-recognition.cpp)
+
+# add_executable(${PROJECT_NAME} src/opencv-version.cpp)
+add_executable(${PROJECT_NAME} src/opencv-read-write.cpp)
+# add_executable(${PROJECT_NAME} src/opencv-webcam.cpp)
+# add_executable(${PROJECT_NAME} src/opencv-dlib-face-det.cpp)
+# add_executable(${PROJECT_NAME} src/opencv-dlib-face-recognition.cpp)
 # target_link_libraries(${PROJECT_NAME} dlib::dlib)
 
 find_package(OpenCV REQUIRED)

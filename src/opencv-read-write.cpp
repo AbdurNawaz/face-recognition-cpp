@@ -31,11 +31,9 @@ int main(int argc, char *argv[]){
     std::string outputPath = argv[2];
     cv::VideoWriter writer = cv::VideoWriter(outputPath, fourcc, cap.get(cv::CAP_PROP_FPS), frame_size);
 
-    std::cout << cap.isOpened() << std::endl;
-
     while(cap.isOpened()){
-        bool isRead = cap.read(frame);
-        if (!isRead){
+        bool isGrabbed = cap.read(frame);
+        if (!isGrabbed){
             break;
         }
         cv::imshow("Frame", frame);

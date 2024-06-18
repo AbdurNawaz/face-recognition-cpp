@@ -1,3 +1,3 @@
 cmake -B build/
 cmake --build build/
-./build/face-recognition-cpp /Users/abdurnawaz/Documents/face-recognition-cpp/input.avi /Users/abdurnawaz/Documents/face-recognition-cpp/output.mp4
+./build/face-recognition-cpp 0 /Users/abdurnawaz/Documents/face-recognition-cpp/output.mp4
