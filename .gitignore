@@ -4,3 +4,4 @@ models/
 .vscode/
 *.avi
 *.mp4
+CMakeUserPresets.json

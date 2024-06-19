@@ -25,3 +25,6 @@ add_executable(${PROJECT_NAME} src/opencv-version.cpp)
 
 find_package(OpenCV CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE opencv_core)
+
+find_package(dlib CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE dlib::dlib)

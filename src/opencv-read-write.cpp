@@ -3,23 +3,29 @@
 #include <stdlib.h>
 #include <string>
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
 
-    if (argc < 2){
+    if (argc < 2)
+    {
         std::cout << "Please enter input & output location of video files" << std::endl;
     }
 
     cv::VideoCapture cap;
     std::string videoInput = argv[1];
-    if (videoInput.at(0) == '0'){
+    if (videoInput.at(0) == '0')
+    {
         cap = cv::VideoCapture(0);
-    } else {
+    }
+    else
+    {
         cap = cv::VideoCapture(videoInput);
     }
-    
+
     cv::Mat frame;
 
-    if (!cap.isOpened()){
+    if (!cap.isOpened())
+    {
         std::cout << "Error occured while opening stream" << std::endl;
     }
 
@@ -31,16 +37,19 @@ int main(int argc, char *argv[]){
     std::string outputPath = argv[2];
     cv::VideoWriter writer = cv::VideoWriter(outputPath, fourcc, cap.get(cv::CAP_PROP_FPS), frame_size);
 
-    while(cap.isOpened()){
+    while (cap.isOpened())
+    {
         bool isGrabbed = cap.read(frame);
-        if (!isGrabbed){
+        if (!isGrabbed)
+        {
             break;
         }
         cv::imshow("Frame", frame);
         writer.write(frame);
 
         int key = cv::waitKey(10);
-        if (key == 'q'){
+        if (key == 'q')
+        {
             break;
         }
     }
