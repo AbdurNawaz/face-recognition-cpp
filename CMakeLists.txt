@@ -2,18 +2,11 @@ cmake_minimum_required(VERSION 3.22)
 
 project(face-recognition-cpp)
 
-# include(FetchContent)
-# FetchContent_Declare(dlib
-#     GIT_REPOSITORY https://github.com/davisking/dlib.git
-#     GIT_TAG        v19.24.4
-# )
-# FetchContent_MakeAvailable(dlib)
 
-
-add_executable(${PROJECT_NAME} src/opencv-version.cpp)
+# add_executable(${PROJECT_NAME} src/opencv-version.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-webcam.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-read-write.cpp)
-# add_executable(${PROJECT_NAME} src/opencv-dlib-face-det.cpp)
+add_executable(${PROJECT_NAME} src/opencv-dlib-face-det.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-dlib-face-recognition.cpp)
 # add_executable(${PROJECT_NAME} src/rest-client.cpp)
 # add_executable(${PROJECT_NAME} src/fmt.cpp)
@@ -24,7 +17,18 @@ add_executable(${PROJECT_NAME} src/opencv-version.cpp)
 # target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 
 find_package(OpenCV CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE opencv_core)
+target_link_libraries(${PROJECT_NAME} PRIVATE opencv_core opencv_highgui)
 
-find_package(dlib CONFIG REQUIRED)
+include(FetchContent)
+FetchContent_Declare(dlib
+    GIT_REPOSITORY https://github.com/davisking/dlib.git
+    GIT_TAG        v19.24.4
+)
+FetchContent_MakeAvailable(dlib)
+
+# set(USE_SSE4_INSTRUCTIONS ON "Use AVX instructions")
+# find_package(dlib CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE dlib::dlib)
+
+find_package(Boost COMPONENTS chrono CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::chrono)
