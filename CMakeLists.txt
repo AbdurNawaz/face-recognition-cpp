@@ -11,12 +11,17 @@ project(face-recognition-cpp)
 
 
 # add_executable(${PROJECT_NAME} src/opencv-version.cpp)
-add_executable(${PROJECT_NAME} src/opencv-read-write.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-webcam.cpp)
+# add_executable(${PROJECT_NAME} src/opencv-read-write.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-dlib-face-det.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-dlib-face-recognition.cpp)
+add_executable(${PROJECT_NAME} src/rest-client.cpp)
 # target_link_libraries(${PROJECT_NAME} dlib::dlib)
 
-find_package(OpenCV REQUIRED)
-include_directories(${OpenCV_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
+find_package(CURL REQUIRED)
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
+
+# find_package(OpenCV REQUIRED)
+# include_directories(${OpenCV_INCLUDE_DIRS})
+# target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
