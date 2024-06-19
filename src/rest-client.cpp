@@ -2,9 +2,9 @@
 #include <iostream>
 #include <string>
 
-static size_t writeCallback(char *buffer, size_t size, size_t nitems, void *outstream)
+static size_t writeCallback(void *buffer, size_t size, size_t nitems, void *outstream)
 {
-    ((std::string *)outstream)->append( buffer, size * nitems);
+    ((std::string *)outstream)->append( (char *)buffer, size * nitems);
     return size * nitems;
 }
 
