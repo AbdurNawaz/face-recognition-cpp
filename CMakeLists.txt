@@ -1,14 +1,17 @@
 cmake_minimum_required(VERSION 3.22)
 
+set(CMAKE_CXX_STANDARD 17)
+
 project(face-recognition-cpp)
 
 
 # add_executable(${PROJECT_NAME} src/opencv-version.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-webcam.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-read-write.cpp)
-add_executable(${PROJECT_NAME} src/opencv-dlib-face-det.cpp)
+# add_executable(${PROJECT_NAME} src/opencv-dlib-face-det.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-dlib-face-recognition.cpp)
 # add_executable(${PROJECT_NAME} src/rest-client.cpp)
+add_executable(${PROJECT_NAME} src/web-server.cpp)
 # add_executable(${PROJECT_NAME} src/fmt.cpp)
 # target_link_libraries(${PROJECT_NAME} dlib::dlib)
 
@@ -32,3 +35,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE dlib::dlib)
 
 find_package(Boost COMPONENTS chrono CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Boost::chrono)
+
+find_package(restinio CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE restinio::restinio)
