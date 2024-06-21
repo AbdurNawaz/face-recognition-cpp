@@ -9,9 +9,9 @@ project(face-recognition-cpp)
 # add_executable(${PROJECT_NAME} src/opencv-webcam.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-read-write.cpp)
 # add_executable(${PROJECT_NAME} src/opencv-dlib-face-det.cpp)
-# add_executable(${PROJECT_NAME} src/opencv-dlib-face-recognition.cpp)
+add_executable(${PROJECT_NAME} src/opencv-dlib-face-recognition.cpp)
 # add_executable(${PROJECT_NAME} src/http-client.cpp)
-add_executable(${PROJECT_NAME} src/web-server.cpp)
+# add_executable(${PROJECT_NAME} src/web-server.cpp)
 # add_executable(${PROJECT_NAME} src/fmt.cpp)
 # target_link_libraries(${PROJECT_NAME} dlib::dlib)
 
@@ -20,7 +20,7 @@ add_executable(${PROJECT_NAME} src/web-server.cpp)
 # target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 
 find_package(OpenCV CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE opencv_core opencv_highgui)
+# target_link_libraries(${PROJECT_NAME} PRIVATE opencv_core opencv_highgui)
 
 include(FetchContent)
 FetchContent_Declare(dlib
@@ -31,7 +31,7 @@ FetchContent_MakeAvailable(dlib)
 
 # set(USE_SSE4_INSTRUCTIONS ON "Use AVX instructions")
 # find_package(dlib CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE dlib::dlib)
+target_link_libraries(${PROJECT_NAME} PUBLIC dlib::dlib opencv_core opencv_highgui)
 
 find_package(Boost COMPONENTS chrono CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Boost::chrono)
