@@ -1,29 +1,46 @@
 #include <restinio/core.hpp>
 
-restinio::request_handling_status_t handler(restinio::request_handle_t req)
+using router_t = restinio::router::express_router_t<>;
+
+std::unique_ptr<router_t> create_request_handler()
 {
-    if (req->header().method() == restinio::http_method_get() && req->header().request_target() == "/")
-    {
-        req->create_response()
-            .append_header(restinio::http_field::server, "Restinio server")
-            .append_header(restinio::http_field::content_type, "text/plain; charset=utf-8")
-            .append_header_date_field()
-            .set_body("Hello World!!")
-            .done();
+    std::unique_ptr<router_t> router = std::make_unique<router_t>();
 
-        return restinio::request_accepted();
-    }
+    router->http_get(
+        "/",
+        [](restinio::request_handle_t req, auto)
+        {
+            req->create_response()
+                .set_body("Hello World!")
+                .done();
+            return restinio::request_accepted();
+        });
 
-    return restinio::request_not_handled();
+    router->http_post(
+        "/post-here",
+        [](restinio::request_handle_t req, auto)
+        {
+            req->create_response()
+                .set_body("{'data': 'success'}")
+                .append_header_date_field()
+                .append_header(restinio::http_field_t::server, "Restinio ")
+                .done();
+
+            return restinio::request_accepted();
+        });
+
+    return router;
 }
 
 int main()
 {
+    using traits_t = restinio::traits_t<restinio::asio_timer_manager_t, restinio::single_threaded_ostream_logger_t, router_t>;
+
     restinio::run(
-        restinio::on_this_thread()
+        restinio::on_this_thread<traits_t>()
             .port(8080)
             .address("localhost")
-            .request_handler(handler));
+            .request_handler(create_request_handler()));
 
     return 0;
 }
